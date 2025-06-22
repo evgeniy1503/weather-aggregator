@@ -17,3 +17,16 @@ spring:
     open-in-view: false
     hibernate:
       ddl-auto: none
+  flyway:
+    enabled: true
+    schemas: weather_aggregator
+
+logging:
+  level:
+    root: INFO
+
+executor:
+  core-pool-size: 10
+  max-pool-size: 20
+  queue-capacity: 100
+  thread-name-prefix: "WeatherThread-"
