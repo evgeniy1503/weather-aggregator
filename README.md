@@ -11,4 +11,13 @@
 4. Gradle
 5. PostgreSQL
 6. Testcontainers
-7. flywaydb
+7. Flywaydb
+8. Docker
+9. Gradle
+
+### Для запукска проекта локально:
+1. Скачиваем проект себе проект через git clone
+2. Для поднятия контейнера с PosgreSQL выполяем команду:
+```bash
+   docker-compose up
+```
