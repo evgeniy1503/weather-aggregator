@@ -14,7 +14,7 @@ import ru.prohorov.weatheraggregator.util.Constants;
  */
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping(Constants.Url.ROOT_ULR)
 @RequiredArgsConstructor
 public class WeatherController {
 
