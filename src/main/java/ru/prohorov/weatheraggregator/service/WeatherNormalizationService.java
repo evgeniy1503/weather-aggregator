@@ -8,5 +8,5 @@ import ru.prohorov.weatheraggregator.dto.response.SourceWeatherResponse;
  */
 public interface WeatherNormalizationService {
 
-    WeatherData normalizeWeatherData(SourceWeatherResponse sourceResponse);
+    WeatherData normalizeWeatherData(final SourceWeatherResponse sourceResponse);
 }

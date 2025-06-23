@@ -11,8 +11,7 @@ public class Constants {
 
     @UtilityClass
     public class Url {
-        public final String ROOT_ULR = "/weather";
-        public final String AGGREGATE_URL = "/aggregate";
+        public final String AGGREGATE_URL = "/weather/aggregate";
     }
 
     @UtilityClass

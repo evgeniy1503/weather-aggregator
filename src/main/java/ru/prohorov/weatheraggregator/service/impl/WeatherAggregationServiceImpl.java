@@ -1,6 +1,7 @@
 package ru.prohorov.weatheraggregator.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import ru.prohorov.weatheraggregator.dto.WeatherData;
 import ru.prohorov.weatheraggregator.dto.response.AggregatedWeatherResponse;
@@ -8,10 +9,10 @@ import ru.prohorov.weatheraggregator.dto.response.SourceWeatherResponse;
 import ru.prohorov.weatheraggregator.service.ExternalWeatherService;
 import ru.prohorov.weatheraggregator.service.WeatherAggregationService;
 import ru.prohorov.weatheraggregator.service.WeatherNormalizationService;
+import ru.prohorov.weatheraggregator.util.CalculateUtils;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 /**
@@ -25,32 +26,34 @@ public class WeatherAggregationServiceImpl implements WeatherAggregationService 
     private final ExternalWeatherService externalWeatherService;
     private final WeatherNormalizationService normalizationService;
 
+    /**
+     * Количество источников
+     */
+    @Value("${weather-aggregator.number-of-sources:1}")
+    private int numberOfSources;
+
     @Override
     public AggregatedWeatherResponse aggregateWeatherData() {
-        // Create 100 requests (for source IDs 1 to 100)
-        List<CompletableFuture<SourceWeatherResponse>> futures = IntStream.rangeClosed(1, 100)
+        List<CompletableFuture<SourceWeatherResponse>> futures = IntStream.rangeClosed(1, numberOfSources)
                 .mapToObj(externalWeatherService::fetchWeather)
                 .toList();
-
-        // Wait for all requests to complete
         CompletableFuture.allOf(futures.toArray(new CompletableFuture[0])).join();
 
-        // Process responses
         List<WeatherData> normalizedData = futures.stream()
                 .map(CompletableFuture::join)
                 .map(normalizationService::normalizeWeatherData)
                 .toList();
 
-        // Calculate averages
-        double avgTemp = normalizedData.stream()
-                .mapToDouble(WeatherData::getTemperature)
-                .average()
-                .orElse(0.0);
-
-        double avgHumidity = normalizedData.stream()
-                .mapToDouble(WeatherData::getHumidity)
-                .average()
-                .orElse(0.0);
+        double avgTemp = CalculateUtils.calculateAverage(
+                normalizedData,
+                WeatherData::getTemperature,
+                0.0
+        );
+        double avgHumidity = CalculateUtils.calculateAverage(
+                normalizedData,
+                WeatherData::getHumidity,
+                0.0
+        );
 
         return new AggregatedWeatherResponse(avgTemp, avgHumidity);
     }

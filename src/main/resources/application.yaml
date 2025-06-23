@@ -30,3 +30,6 @@ executor:
   max-pool-size: 20
   queue-capacity: 100
   thread-name-prefix: "WeatherThread-"
+
+weather-aggregator:
+  number-of-sources: 100

@@ -20,6 +20,7 @@ import java.util.Map;
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SourceWeatherResponse {
+
     private Integer sourceId;
 
     @JsonProperty("temp")

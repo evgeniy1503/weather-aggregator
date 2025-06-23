@@ -17,7 +17,7 @@ import java.util.concurrent.Executor;
 public class AsyncConfig {
 
     @Bean(Constants.BeanNames.WEATHER_TASK_EXECUTOR)
-    public Executor taskExecutor(ExecutorProperties executorProperties) {
+    public Executor taskExecutor(final ExecutorProperties executorProperties) {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         executor.setCorePoolSize(executorProperties.getCorePoolSize());
         executor.setMaxPoolSize(executorProperties.getMaxPoolSize());

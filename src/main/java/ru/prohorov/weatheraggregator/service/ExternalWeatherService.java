@@ -9,5 +9,5 @@ import java.util.concurrent.CompletableFuture;
  */
 public interface ExternalWeatherService {
 
-    CompletableFuture<SourceWeatherResponse> fetchWeather(int sourceId);
+    CompletableFuture<SourceWeatherResponse> fetchWeather(final int sourceId);
 }

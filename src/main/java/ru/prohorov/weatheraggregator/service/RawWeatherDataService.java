@@ -7,7 +7,7 @@ import ru.prohorov.weatheraggregator.model.RawWeatherData;
  */
 public interface RawWeatherDataService {
 
-    void saveRawWeatherData(RawWeatherData rawWeatherData);
+    void saveRawWeatherData(final RawWeatherData rawWeatherData);
 
-    RawWeatherData getRawWeatherData(Long id);
+    RawWeatherData getRawWeatherData(final Long id);
 }
