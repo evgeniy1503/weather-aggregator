@@ -28,7 +28,7 @@ class WeatherControllerTest {
         Mockito.when(aggregationService.aggregateWeatherData())
                 .thenReturn(new AggregatedWeatherResponse(22.5, 65.0));
 
-        mockMvc.perform(get("/api/v1/weather/aggregate"))
+        mockMvc.perform(get("/weather/aggregate"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.averageTemperature").value(22.5))
                 .andExpect(jsonPath("$.averageHumidity").value(65.0));
