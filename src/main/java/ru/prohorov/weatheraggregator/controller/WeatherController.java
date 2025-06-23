@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.prohorov.weatheraggregator.dto.response.AggregatedWeatherResponse;
+import ru.prohorov.weatheraggregator.service.WeatherAggregationService;
 import ru.prohorov.weatheraggregator.util.Constants;
 
 /**
