@@ -78,7 +78,7 @@ class WeatherData {
 - Усреднить полученные данные.
 
 Вернуть агрегированный ответ:
-```json
+```java
 {
   "averageTemperature": double,
   "averageHumidity": double
